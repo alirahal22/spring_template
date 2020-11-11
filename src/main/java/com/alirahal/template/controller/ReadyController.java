@@ -1,5 +1,6 @@
 package com.alirahal.template.controller;
 
+import com.alirahal.template.exceptions.ApiErrorFactory;
 import com.alirahal.template.utils.EncryptionUtils;
 import com.alirahal.template.utils.Utils;
 import org.springframework.beans.factory.annotation.Value;
@@ -28,7 +29,7 @@ public class ReadyController {
     }
 
     /**
-     * @RequestParam Map<String ,   String> allParams
+     * @RequestParam Map<String   ,       String> allParams
      * can be used to map all params instead of passing
      * each one as a parameter
      **/
