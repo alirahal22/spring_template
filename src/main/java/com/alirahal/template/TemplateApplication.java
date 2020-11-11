@@ -3,6 +3,7 @@ package com.alirahal.template;
 import java.util.TimeZone;
 import java.util.logging.Logger;
 
+import com.alirahal.template.utils.Utils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
