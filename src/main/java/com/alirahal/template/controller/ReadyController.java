@@ -1,6 +1,7 @@
 package com.alirahal.template.controller;
 
 import com.alirahal.template.exceptions.ApiErrorFactory;
+import com.alirahal.template.exceptions.NotFound404;
 import com.alirahal.template.utils.EncryptionUtils;
 import com.alirahal.template.utils.Utils;
 import org.springframework.beans.factory.annotation.Value;
