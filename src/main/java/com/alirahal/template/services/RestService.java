@@ -1,6 +1,7 @@
 package com.alirahal.template.services;
 
 import com.alirahal.template.database.BaseEntity;
+import com.alirahal.template.error.exceptions.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 
@@ -19,8 +20,8 @@ public class RestService<Model extends BaseEntity, Repository extends CrudReposi
         return StreamSupport.stream(iterable.spliterator(), false).collect(Collectors.toList());
     }
 
-    public Model get(UUID id) {
-        return repository.findById(id).orElseThrow();
+    public Model get(UUID id) throws NotFoundException {
+        return repository.findById(id).orElseThrow(NotFoundException::new);
     }
 
     public Model create(Model model) {
@@ -28,10 +29,10 @@ public class RestService<Model extends BaseEntity, Repository extends CrudReposi
         return newModel;
     }
 
-    public Model update(UUID id, Model updateData) {
+    public Model update(UUID id, Model updateData) throws NotFoundException {
         updateData.setId(id);
         repository.save(updateData);
-        Model updatedObject = repository.findById(id).orElseThrow();
+        Model updatedObject = repository.findById(id).orElseThrow(NotFoundException::new);
         return updatedObject;
     }
 

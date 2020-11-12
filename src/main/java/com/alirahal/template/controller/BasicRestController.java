@@ -1,6 +1,7 @@
 package com.alirahal.template.controller;
 
 import com.alirahal.template.database.BaseEntity;
+import com.alirahal.template.error.exceptions.NotFoundException;
 import com.alirahal.template.model.Student;
 import com.alirahal.template.services.RestService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,7 @@ public class BasicRestController<Model extends BaseEntity, Service extends RestS
     }
 
     @GetMapping(value = {"/{id}/", "/{id}"})
-    public ResponseEntity<Model> getModel(@PathVariable String id) {
+    public ResponseEntity<Model> getModel(@PathVariable String id) throws NotFoundException {
         Model student = service.get(UUID.fromString(id));
         return ResponseEntity.ok(student);
     }
@@ -38,7 +39,7 @@ public class BasicRestController<Model extends BaseEntity, Service extends RestS
     }
 
     @PatchMapping(value = {"/{id}/", "/{id}"})
-    public ResponseEntity<Model> updateModel(@PathVariable String id, @RequestBody Model body) {
+    public ResponseEntity<Model> updateModel(@PathVariable String id, @RequestBody Model body) throws NotFoundException {
         Model updatedModel = service.update(UUID.fromString(id), body);
         return ResponseEntity.ok(updatedModel);
     }
