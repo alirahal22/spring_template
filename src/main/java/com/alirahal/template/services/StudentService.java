@@ -9,33 +9,6 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
-public class StudentService {
+public class StudentService extends RestService<Student, StudentRepository> {
 
-    @Autowired
-    private StudentRepository studentRepository;
-
-    public List<Student> getAll() {
-        Iterable<Student> studentIterable = studentRepository.findAll();
-        return StreamSupport.stream(studentIterable.spliterator(), false).collect(Collectors.toList());
-    }
-
-    public Student get(UUID id) {
-        return studentRepository.findById(id).orElseThrow();
-    }
-
-    public Student create(Student student) {
-        Student newStudent = studentRepository.save(student);
-        return newStudent;
-    }
-
-    public Student update(UUID id, Student updateData) {
-        updateData.setId(id);
-        studentRepository.save(updateData);
-        Student updatedObject = studentRepository.findById(id).orElseThrow();
-        return updatedObject;
-    }
-
-    public void delete(UUID id) {
-        studentRepository.deleteById(id);
-    }
 }

@@ -8,44 +8,17 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.logging.Logger;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
 @RequestMapping(value = "/student")
-public class StudentController {
+public class StudentController extends BasicRestController<Student, StudentService> {
 
-    @Autowired
-    StudentService studentService;
-
-    @GetMapping(value = {"/", ""})
-    public ResponseEntity<List<Student>> getStudent() {
-        List<Student> students = studentService.getAll();
-        return ResponseEntity.ok(students);
+    @GetMapping(value = "/custom_route")
+    public ResponseEntity example() {
+        Logger.getAnonymousLogger().info("This is a custom route to add other mapping to the generic rest controller");
+        return ResponseEntity.accepted().build();
     }
-
-    @GetMapping(value = {"/{id}/", "/{id}"})
-    public ResponseEntity<Student> getStudent(@PathVariable String id) {
-        Student student = studentService.get(UUID.fromString(id));
-        return ResponseEntity.ok(student);
-    }
-
-    @PostMapping(value = {"/", ""}, consumes = APPLICATION_JSON_VALUE)
-    public ResponseEntity<Student> addStudent(@RequestBody Student body) {
-        studentService.create(body);
-        return ResponseEntity.ok(body);
-    }
-
-    @PatchMapping(value = {"/{id}/", "/{id}"})
-    public ResponseEntity<Student> updateStudent(@PathVariable String id, @RequestBody Student body) {
-        Student updatedStudent = studentService.update(UUID.fromString(id), body);
-        return ResponseEntity.ok(updatedStudent);
-    }
-
-    @DeleteMapping(value = {"/{id}/", "/{id}"})
-    public ResponseEntity<Student> deleteStudent(@PathVariable String id) {
-        studentService.delete(UUID.fromString(id));
-        return ResponseEntity.ok(null);
-    }
-
 }
