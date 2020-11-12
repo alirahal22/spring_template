@@ -1,4 +1,4 @@
-package com.alirahal.template.exceptions;
+package com.alirahal.template.error;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

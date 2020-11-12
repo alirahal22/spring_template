@@ -1,5 +1,7 @@
-package com.alirahal.template.exceptions;
+package com.alirahal.template.error;
 
+import com.alirahal.template.error.exceptions.NotFoundException;
+import com.alirahal.template.error.exceptions.ValidationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -19,11 +21,11 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
         ex.printStackTrace();
     }
 
-    @ExceptionHandler({NotFound404.class})
-    @ResponseStatus(value = HttpStatus.NOT_FOUND)
-    public ResponseEntity<Object> handleNotFoundError(final NotFound404 ex, final WebRequest request) {
+    @ExceptionHandler({NotFoundException.class, ValidationException.class})
+    public ResponseEntity<Object> handleRestErrors(final Exception ex, final WebRequest request) {
         Logger.getAnonymousLogger().warning(ex.getLocalizedMessage());
-        return ResponseEntity.ok().body(ApiErrorFactory.NOT_FOUND.provide());
+        ApiError error = ApiErrorFactory.getError(ex.getClass());
+        return ResponseEntity.status(error.getStatus()).body(error);
     }
 
 

@@ -1,15 +1,12 @@
 package com.alirahal.template.controller;
 
-import com.alirahal.template.exceptions.ApiErrorFactory;
-import com.alirahal.template.exceptions.NotFound404;
-import com.alirahal.template.utils.EncryptionUtils;
-import com.alirahal.template.utils.Utils;
+import com.alirahal.template.error.exceptions.NotFoundException;
+import com.alirahal.template.error.exceptions.ValidationException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
-import java.util.logging.Logger;
 
 @RestController
 @RequestMapping("/ready")
@@ -20,7 +17,7 @@ public class ReadyController {
 
 
     @GetMapping("")
-    public ResponseEntity<Map<String, String>> getReadyStatus() {
+    public ResponseEntity<Map<String, String>> getReadyStatus() throws Exception {
         return ResponseEntity.ok().body(Map.of("status", "ready"));
     }
 
