@@ -21,7 +21,7 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
 
     @ExceptionHandler({NotFound404.class})
     @ResponseStatus(value = HttpStatus.NOT_FOUND)
-    public ResponseEntity<Object> handleConstraintViolationException(final NotFound404 ex, final WebRequest request) {
+    public ResponseEntity<Object> handleNotFoundError(final NotFound404 ex, final WebRequest request) {
         Logger.getAnonymousLogger().warning(ex.getLocalizedMessage());
         return ResponseEntity.ok().body(ApiErrorFactory.NOT_FOUND.provide());
     }
