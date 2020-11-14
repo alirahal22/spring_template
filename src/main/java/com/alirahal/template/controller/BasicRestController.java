@@ -2,7 +2,6 @@ package com.alirahal.template.controller;
 
 import com.alirahal.template.database.BaseEntity;
 import com.alirahal.template.error.exceptions.NotFoundException;
-import com.alirahal.template.model.Student;
 import com.alirahal.template.services.RestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -22,14 +21,14 @@ public class BasicRestController<Model extends BaseEntity, Service extends RestS
 
     @GetMapping(value = {"/", ""})
     public ResponseEntity<List<Model>> getAll() throws NotFoundException {
-        List<Model> students = service.getAll();
-        return ResponseEntity.ok(students);
+        List<Model> items = service.getAll();
+        return ResponseEntity.ok(items);
     }
 
     @GetMapping(value = {"/{id}/", "/{id}"})
     public ResponseEntity<Model> getById(@PathVariable String id) throws NotFoundException {
-        Model student = service.get(UUID.fromString(id));
-        return ResponseEntity.ok(student);
+        Model item = service.get(UUID.fromString(id));
+        return ResponseEntity.ok(item);
     }
 
     @PostMapping(value = {"/", ""}, consumes = APPLICATION_JSON_VALUE)
