@@ -21,31 +21,31 @@ public class BasicRestController<Model extends BaseEntity, Service extends RestS
     Service service;
 
     @GetMapping(value = {"/", ""})
-    public ResponseEntity<List<Model>> getStudent() {
+    public ResponseEntity<List<Model>> getAll() throws NotFoundException {
         List<Model> students = service.getAll();
         return ResponseEntity.ok(students);
     }
 
     @GetMapping(value = {"/{id}/", "/{id}"})
-    public ResponseEntity<Model> getModel(@PathVariable String id) throws NotFoundException {
+    public ResponseEntity<Model> getById(@PathVariable String id) throws NotFoundException {
         Model student = service.get(UUID.fromString(id));
         return ResponseEntity.ok(student);
     }
 
     @PostMapping(value = {"/", ""}, consumes = APPLICATION_JSON_VALUE)
-    public ResponseEntity<Model> addModel(@RequestBody Model body) {
+    public ResponseEntity<Model> add(@RequestBody Model body) {
         service.create(body);
         return ResponseEntity.ok(body);
     }
 
     @PatchMapping(value = {"/{id}/", "/{id}"})
-    public ResponseEntity<Model> updateModel(@PathVariable String id, @RequestBody Model body) throws NotFoundException {
+    public ResponseEntity<Model> update(@PathVariable String id, @RequestBody Model body) throws NotFoundException {
         Model updatedModel = service.update(UUID.fromString(id), body);
         return ResponseEntity.ok(updatedModel);
     }
 
     @DeleteMapping(value = {"/{id}/", "/{id}"})
-    public ResponseEntity<Model> deleteModel(@PathVariable String id) {
+    public ResponseEntity<Model> delete(@PathVariable String id) {
         service.delete(UUID.fromString(id));
         return ResponseEntity.ok(null);
     }
