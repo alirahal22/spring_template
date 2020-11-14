@@ -1,18 +1,16 @@
 package com.alirahal.template.controller;
 
-import com.alirahal.template.error.exceptions.NotFoundException;
 import com.alirahal.template.model.Product;
-import com.alirahal.template.services.ProductService;
+import com.alirahal.template.services.ProductsService;
 import com.github.fge.jsonpatch.JsonPatch;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
-import java.util.logging.Logger;
 
 @RestController
 @RequestMapping(value = "/product")
-public class ProductController extends BasicRestController<Product, ProductService> {
+public class ProductController extends BasicRestController<Product, ProductsService> {
 
     /**
      * To add a new operation other than the base CRUD operations

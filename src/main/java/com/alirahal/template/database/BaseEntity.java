@@ -17,6 +17,7 @@ import java.util.UUID;
 
 @MappedSuperclass
 @Data
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class BaseEntity {
 
     @Id

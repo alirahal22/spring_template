@@ -7,6 +7,8 @@ import lombok.ToString;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
 
 @Data
 @ToString(callSuper = true)
@@ -20,7 +22,8 @@ public class Product extends BaseEntity {
     @Column(columnDefinition = "NUMERIC")
     private float weight;
 
-//    private Brand brand;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Brand brand;
 
 }
 

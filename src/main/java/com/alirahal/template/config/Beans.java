@@ -1,14 +1,24 @@
 package com.alirahal.template.config;
 
-import com.alirahal.template.services.ProductService;
+import com.alirahal.template.services.BrandsService;
+import com.alirahal.template.services.ProductsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 
 @Configuration
 public class Beans {
 
     @Bean
-    public ProductService getProductService() {
-        return new ProductService();
+    @Primary
+    public BrandsService getBrandsService() {
+        return new BrandsService();
     }
+    
+    @Bean
+    public ProductsService getProductService() {
+        return new ProductsService();
+    }
+
+
 }
