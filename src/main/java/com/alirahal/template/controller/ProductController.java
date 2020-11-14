@@ -1,12 +1,13 @@
 package com.alirahal.template.controller;
 
+import com.alirahal.template.error.exceptions.NotFoundException;
 import com.alirahal.template.model.Product;
 import com.alirahal.template.services.ProductService;
+import com.github.fge.jsonpatch.JsonPatch;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
 import java.util.logging.Logger;
 
 @RestController
@@ -16,9 +17,10 @@ public class ProductController extends BasicRestController<Product, ProductServi
     /**
      * To add a new operation other than the base CRUD operations
      */
-    @GetMapping(value = "/custom_route")
-    public ResponseEntity example() {
-        return ResponseEntity.accepted().build();
+    @PatchMapping(value = {"/{id}/", "/{id}"})
+    public ResponseEntity<Product> patch(@PathVariable String id, @RequestBody JsonPatch body) throws Exception {
+        Product patchedModel = service.patch(UUID.fromString(id), body);
+        return ResponseEntity.ok(patchedModel);
     }
 
     /**

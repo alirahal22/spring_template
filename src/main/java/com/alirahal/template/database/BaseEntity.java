@@ -1,9 +1,12 @@
 package com.alirahal.template.database;
 
+import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import javax.annotation.Nullable;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -14,7 +17,6 @@ import java.util.UUID;
 
 @MappedSuperclass
 @Data
-
 public class BaseEntity {
 
     @Id
@@ -28,4 +30,5 @@ public class BaseEntity {
     @UpdateTimestamp
     @Column(name = "date_updated")
     private OffsetDateTime updateDateTime;
+
 }

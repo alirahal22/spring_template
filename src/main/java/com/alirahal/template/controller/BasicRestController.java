@@ -37,8 +37,8 @@ public class BasicRestController<Model extends BaseEntity, Service extends RestS
         return ResponseEntity.ok(body);
     }
 
-    @PatchMapping(value = {"/{id}/", "/{id}"})
-    public ResponseEntity<Model> update(@PathVariable String id, @RequestBody Model body) throws NotFoundException {
+    @PutMapping(value = {"/{id}/", "/{id}"})
+    public ResponseEntity<Model> put(@PathVariable String id, @RequestBody Model body) throws NotFoundException {
         Model updatedModel = service.update(UUID.fromString(id), body);
         return ResponseEntity.ok(updatedModel);
     }

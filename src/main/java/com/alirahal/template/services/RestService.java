@@ -2,6 +2,10 @@ package com.alirahal.template.services;
 
 import com.alirahal.template.database.BaseEntity;
 import com.alirahal.template.error.exceptions.NotFoundException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.fge.jsonpatch.JsonPatch;
+import com.github.fge.jsonpatch.JsonPatchException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 

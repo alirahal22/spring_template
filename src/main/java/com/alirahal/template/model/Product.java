@@ -1,16 +1,17 @@
 package com.alirahal.template.model;
 
 import com.alirahal.template.database.BaseEntity;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.ToString;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import java.math.BigDecimal;
 
 @Data
 @ToString(callSuper = true)
 @Entity
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Product extends BaseEntity {
 
     private String name;
@@ -22,3 +23,4 @@ public class Product extends BaseEntity {
 //    private Brand brand;
 
 }
+
