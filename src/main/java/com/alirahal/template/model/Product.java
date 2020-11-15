@@ -1,6 +1,7 @@
 package com.alirahal.template.model;
 
 import com.alirahal.template.database.BaseEntity;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.ToString;
@@ -22,6 +23,7 @@ public class Product extends BaseEntity {
     @Column(columnDefinition = "NUMERIC")
     private float weight;
 
+    @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
     private Brand brand;
 
