@@ -16,14 +16,14 @@ import java.util.logging.Logger;
 public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(Exception.class)
-    @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR, reason = "Some problem occured")
+    @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR, reason = "Some problem occurred")
     public void handleGenericException(final Exception ex, final WebRequest request) {
         ex.printStackTrace();
     }
 
     @ExceptionHandler({NotFoundException.class, ValidationException.class})
     public ResponseEntity<Object> handleRestErrors(final Exception ex, final WebRequest request) {
-        Logger.getAnonymousLogger().warning(ex.getLocalizedMessage());
+        logger.warn(ex.getLocalizedMessage());
         ApiError error = ApiErrorFactory.getError(ex.getClass());
         return ResponseEntity.status(error.getStatus()).body(error);
     }

@@ -3,10 +3,12 @@ package com.alirahal.template.controller;
 import com.alirahal.template.database.BaseEntity;
 import com.alirahal.template.error.exceptions.NotFoundException;
 import com.alirahal.template.services.RestService;
+import com.fasterxml.jackson.databind.JsonNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
@@ -15,12 +17,14 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RestController
 public class BasicRestController<Model extends BaseEntity, Service extends RestService<Model, ?>> {
 
-    /** @noinspection SpringJavaInjectionPointsAutowiringInspection*/
+    /**
+     * @noinspection SpringJavaInjectionPointsAutowiringInspection
+     */
     @Autowired
     Service service;
 
     @GetMapping(value = {"/", ""})
-    public ResponseEntity<List<Model>> getAll() throws NotFoundException {
+    public ResponseEntity<List<Model>> getAll() {
         List<Model> items = service.getAll();
         return ResponseEntity.ok(items);
     }
@@ -37,8 +41,9 @@ public class BasicRestController<Model extends BaseEntity, Service extends RestS
         return ResponseEntity.ok(body);
     }
 
-    @PutMapping(value = {"/{id}/", "/{id}"})
-    public ResponseEntity<Model> put(@PathVariable String id, @RequestBody Model body) throws NotFoundException {
+    @PatchMapping(value = {"/{id}/", "/{id}"})
+    public ResponseEntity<Model> patch(@PathVariable String id, @RequestBody JsonNode body) throws NotFoundException,
+            IOException {
         Model updatedModel = service.update(UUID.fromString(id), body);
         return ResponseEntity.ok(updatedModel);
     }

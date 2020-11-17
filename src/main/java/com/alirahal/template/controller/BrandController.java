@@ -15,13 +15,4 @@ import java.util.UUID;
 @RequestMapping(value = "/brand")
 public class BrandController extends BasicRestController<Brand, BrandsService> {
 
-    /**
-     * To add a new operation other than the base CRUD operations
-     */
-//    @PatchMapping(value = {"/{id}/", "/{id}"})
-//    public ResponseEntity<Product> patch(@PathVariable String id, @RequestBody JsonPatch body) throws Exception {
-//        Product patchedModel = service.patch(UUID.fromString(id), body);
-//        return ResponseEntity.ok(patchedModel);
-//    }
-
 }

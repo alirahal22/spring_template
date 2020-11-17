@@ -14,11 +14,10 @@ public class Beans {
     public BrandsService getBrandsService() {
         return new BrandsService();
     }
-    
+
     @Bean
     public ProductsService getProductService() {
         return new ProductsService();
     }
-
 
 }

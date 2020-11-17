@@ -10,17 +10,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.fge.jsonpatch.JsonPatch;
 import com.github.fge.jsonpatch.JsonPatchException;
 
+import java.io.IOException;
 import java.util.UUID;
 
 public class ProductsService extends RestService<Product, ProductRepository> {
 
-    public Product patch(UUID id, JsonPatch patch) throws NotFoundException, JsonPatchException,
-            JsonProcessingException {
-        Product originalEntity = get(id);
-        ObjectMapper mapper = MapperFactory.IGNORE_TIMESTAMPS_MAPPER.provide(Product.class);
-        JsonNode patched = patch.apply(mapper.convertValue(originalEntity, JsonNode.class));
-        Product newProduct = mapper.treeToValue(patched, Product.class);
-        repository.save(newProduct);
-        return newProduct;
-    }
 }
