@@ -49,7 +49,7 @@ public class ValidationService implements HasLogger {
         byte[] bodyBytes = StreamUtils.copyToByteArray(inputStream);
         String requestBody = new String(bodyBytes);
         long currentTimestamp = new Date().getTime();
-        if (requestTimestamp == null) {
+        if (StringUtils.isBlank(requestTimestamp)) {
             throw new ValidationException("Missing timestamp in request");
         }
         if (currentTimestamp - Long.parseLong(requestTimestamp) > 10000) {
