@@ -15,7 +15,7 @@ public class KeyUtils {
     public static String getKey(String filename) throws IOException {
         InputStream in = KeyUtils.class.getResourceAsStream(filename);
         String key = new String(in.readAllBytes(), Charset.defaultCharset());
-        Logger.getAnonymousLogger().info(key);
+        Logger.getAnonymousLogger().info("\n" + key);
         return key;
     }
 
