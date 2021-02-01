@@ -26,7 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Order(Ordered.HIGHEST_PRECEDENCE + 1)
-@Component
+//@Component
 @WebFilter(filterName = "validateSignatureFilter", urlPatterns = {"/*"})
 public class ValidateSignatureFilter extends OncePerRequestFilter implements HasLogger {
 

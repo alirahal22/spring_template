@@ -9,8 +9,13 @@ It supports many features.
 * ✓ CRUD operations
 * ✓ Signature validation
 * X User Authentication
-* X Pagination
+* X Pagination and sorting
 * X Filters
+* X Search
+* X Versioning
+* X Unit and Intergration Testing (Most likely will stick to spring boot's testing module)
+
+
 
 ## Migrations
 
@@ -31,4 +36,12 @@ Just open `application.properties` file and replace
 with
 
     spring.jpa.hibernate.ddl-auto=update
+
+
+## Running the project
+
+To launch the project just run this command from the project's root directory
+    
+    ./mvnw spring-boot:run
+
 
