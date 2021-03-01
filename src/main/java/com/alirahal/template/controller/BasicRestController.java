@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
-import java.util.logging.Logger;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
@@ -25,15 +25,10 @@ public class BasicRestController<Model extends BaseEntity, Service extends RestS
     Service service;
 
     @GetMapping(value = {""})
-    public ResponseEntity<List<Model>> getAll(@RequestParam(required = false, name = "offset") Integer page,
-                                              @RequestParam(required = false, name = "limit") Integer size,
-                                              @RequestParam(required = false, name = "sort") List<String>
-                                                      sortingParams) {
-        if (size != null && page != null)
-            return ResponseEntity.ok(service.getByPage(page, size, sortingParams));
-        if (sortingParams != null && !sortingParams.isEmpty())
-            return ResponseEntity.ok(service.getSorted(sortingParams));
-        return ResponseEntity.ok(service.getAll());
+    public ResponseEntity<List<Model>> getAll(
+            @RequestParam(required = false, name = "sort") List<String> sortingParams,
+            @RequestParam Map<String, String> queryParams) throws NotFoundException {
+        return ResponseEntity.ok(service.getWithFilters(queryParams, sortingParams));
     }
 
     @GetMapping(value = {"/{id}"})

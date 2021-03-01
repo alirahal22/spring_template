@@ -8,12 +8,12 @@ It supports many features.
 * ✓ Database Migrations
 * ✓ CRUD operations
 * ✓ Signature validation
-* X User Authentication
-* X Pagination and sorting
-* X Filters
-* X Search
+* ✓ Pagination and sorting
+* ✓ Filters and Searching
 * X Versioning
+* X User Authentication
 * X Unit and Intergration Testing (Most likely will stick to spring boot's testing module)
+* X Media transfer
 
 
 

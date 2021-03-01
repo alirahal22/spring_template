@@ -5,6 +5,7 @@ import com.alirahal.template.error.exceptions.NotFoundException;
 import com.alirahal.template.error.exceptions.ValidationException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
+import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -26,7 +27,8 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
         ex.printStackTrace();
     }
 
-    @ExceptionHandler({NotFoundException.class, ValidationException.class})
+    @ExceptionHandler({NotFoundException.class, ValidationException.class, IllegalArgumentException.class,
+            InvalidDataAccessApiUsageException.class})
     public ResponseEntity<Object> handleRestErrors(final Exception ex, final WebRequest request) {
         logger.warn(ex.getLocalizedMessage());
         ApiError error = ApiErrorFactory.getError(ex.getClass());

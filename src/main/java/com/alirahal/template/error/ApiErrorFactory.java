@@ -4,6 +4,7 @@ import com.alirahal.template.error.exceptions.NotFoundException;
 import com.alirahal.template.error.exceptions.ValidationException;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.http.HttpStatus;
 
 import java.util.Arrays;
@@ -18,7 +19,12 @@ public enum ApiErrorFactory {
 
     NOT_FOUND(NotFoundException.class, HttpStatus.NOT_FOUND.value(), "The requested resource was not found",
             ApiError::new),
-    BAD_REQUEST(ValidationException.class, HttpStatus.BAD_REQUEST.value(), "Validation error", ApiError::new);
+    BAD_REQUEST(ValidationException.class, HttpStatus.BAD_REQUEST.value(), "Validation error", ApiError::new),
+    ILLEGAL_ARGUMENT(IllegalArgumentException.class, HttpStatus.BAD_REQUEST.value(), "Illegal arguments passed",
+            ApiError::new),
+    INVALID_DATA_ACCESS(InvalidDataAccessApiUsageException.class, HttpStatus.BAD_REQUEST.value(), "Illegal arguments " +
+            "passed",
+            ApiError::new);
 
     private final Class exception;
     private final int status;
